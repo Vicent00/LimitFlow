@@ -167,7 +167,7 @@ contract LimitOrderProtocol is Ownable, ReentrancyGuard, Pausable {
         address _feeCollector
     ) Ownable(msg.sender) {
         require(_usdc != address(0) && _weth != address(0), "Zero address");
-        require(_uniswapFactory != address(0), "Zero factory address");
+       /* require(_uniswapFactory != address(0), "Zero factory address");*/
         require(_minOrderAmount > 0 && _maxOrderAmount > _minOrderAmount, "Invalid amounts");
         require(_orderExpiryTime > 0 && _orderExpiryTime <= 7 days, "Invalid expiry time");
 
