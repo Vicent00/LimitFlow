@@ -1,0 +1,16 @@
+// Configuracion para ignorar el archivo .env
+.env
+
+// Configuracion para ignorar el archivo .env.local
+.env.local
+
+
+// Configuracion para ignorar archivos sensibles
+
+# Archivos de configuración de la base de datos
+prisma/
+
+# Archivos de configuración de la aplicación
+config/
+
+
