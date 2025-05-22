@@ -1,0 +1,37 @@
+{
+  "name": "limitflow-backend",
+  "version": "1.0.0",
+  "description": "Backend for LimitFlow DApp",
+  "main": "src/server/index.ts",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server/index.ts",
+    "build": "tsc",
+    "start": "node dist/server/index.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "blockchain",
+    "trading",
+    "limit-orders"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^6.8.2",
+    "@trpc/client": "^11.1.2",
+    "@trpc/server": "^11.1.2",
+    "express": "^5.1.0",
+    "viem": "^2.30.0",
+    "zod": "^3.25.20"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.15.21",
+    "jest": "^29.7.0",
+    "prisma": "^6.8.2",
+    "ts-jest": "^29.3.4",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  address       String   @unique
+  nonce         String?  // Para la autenticación con wagmi
+  isAdmin       Boolean  @default(false)
+  orders        Order[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([address])
+}
+
+model Order {
+  id          String      @id @default(uuid())
+  userAddress String
+  tokenIn     String
+  tokenOut    String
+  amountIn    BigInt
+  amountOut   BigInt
+  status      OrderStatus
+  type        OrderType   // BUY o SELL
+  price       Float       // Precio límite
+  expiresAt   DateTime?   // Fecha de expiración de la orden
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  user        User        @relation(fields: [userAddress], references: [address])
+  fills       Fill[]      // Relación con los fills de la orden
+
+  @@index([userAddress])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Fill {
+  id        String   @id @default(uuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id])
+  amount    BigInt
+  price     Float
+  timestamp DateTime @default(now())
+
+  @@index([orderId])
+  @@index([timestamp])
+}
+
+model Price {
+  id        String   @id @default(uuid())
+  tokenIn   String
+  tokenOut  String
+  price     Float
+  timestamp DateTime @default(now())
+  source    String   // Fuente del precio (ej: "chainlink", "uniswap", etc.)
+  chainId   Int      // ID de la red (1 para mainnet, 137 para polygon, etc.)
+
+  @@index([tokenIn, tokenOut])
+  @@index([timestamp])
+  @@index([chainId])
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+  FAILED
+  EXPIRED
+}
+
+enum OrderType {
+  BUY
+  SELL
+} 
