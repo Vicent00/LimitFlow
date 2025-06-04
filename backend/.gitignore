@@ -5,12 +5,23 @@
 .env.local
 
 
-// Configuracion para ignorar archivos sensibles
-
 # Archivos de configuración de la base de datos
 prisma/
 
 # Archivos de configuración de la aplicación
 config/
 
+# Database
+DATABASE_URL="postgresql://user:password@localhost:5432/dbname"
 
+# Keeper
+KEEPER_PRIVATE_KEY="your_private_key_here"
+KEEPER_ADDRESS="your_address_here"
+
+# RPC
+RPC_URL="your_rpc_url_here"
+
+# Contract
+CONTRACT_ADDRESS="your_contract_address_here"
+
+coverage/

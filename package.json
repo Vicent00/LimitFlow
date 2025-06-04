@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@uniswap/sdk-core": "^7.7.2",
+    "@uniswap/v3-sdk": "^3.25.2",
+    "lightweight-charts": "^5.0.7"
+  }
+}
