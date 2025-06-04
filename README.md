@@ -1,47 +1,82 @@
 # Limit Order Protocol
 
-Un sistema que permite a cualquier usuario colocar órdenes “compra X por ≤ P” o “vende X por ≥ P” y que éstas solo se ejecuten cuando el precio en el AMM cruce ese umbral.
+A system that allows any user to place "buy X for ≤ P" or "sell X for ≥ P" orders that only execute when the AMM price crosses that threshold.
 
 ---
 
-## 📋 Resumen rápido
+## 📋 Quick Overview
 
-### 1. Contrato Core
+### 1. Core Contract
 
-- Guarda y gestiona órdenes en una estructura ordenada por precio  
-- **Funciones clave**:  
+- Stores and manages orders in a price-sorted structure  
+- **Key Functions**:  
   - `placeOrder()`  
   - `cancelOrder()`  
   - `executeOrder()`  
-- Validación on-chain de precio contra Uniswap (o Chainlink)
+- On-chain price validation against Uniswap (or Chainlink)
 
 ### 2. Keepers (Bots)
 
-- Escuchan eventos de nuevas órdenes  
-- Monitorean el precio (tick de Uniswap o Feed de Chainlink)  
-- Ejecutan `executeOrder()` cuando se cumple la condición  
-- Se incentivan cobrando una pequeña comisión o gas-refund en tokens
+- Listen for new order events  
+- Monitor price (Uniswap tick or Chainlink feed)  
+- Execute `executeOrder()` when conditions are met  
+- Incentivized through small commission or token gas-refund
 
-### 3. Indexador / Subgraph
+### 3. Indexer / Subgraph
 
-- Indexa órdenes abiertas y ejecuciones para el frontend  
-- Facilita la construcción de un “order book” on-chain
+- Indexes open orders and executions for the frontend  
+- Facilitates building an on-chain "order book"
 
 ### 4. Frontend
 
-- Formulario de creación / cancelación de órdenes  
-- Visualización del order book y del histórico de ejecuciones  
-- Integración con Wagmi / Viem para firmas y lectura de eventos
+- Order creation/cancellation form  
+- Order book and execution history visualization  
+- Wagmi / Viem integration for signatures and event reading
 
-### 5. Redes y Tokens
+### 5. Networks and Tokens
 
-| Entorno          | Redes principales                          | Tokens soportados  |
-|------------------|--------------------------------------------|--------------------|
-| **Producción**   | Ethereum Mainnet                           | WETH / USDC        |
-|                  | Arbitrum One, Optimism, Polygon PoS        | (ERC-20 sólo)      |
-| **Testnets**     | Goerli (incl. Goerli-Arbitrum)             | WETH / USDC        |
-|                  | Mumbai (Polygon)                           | (ERC-20 sólo)      |
+| Environment      | Main Networks                          | Supported Tokens  |
+|------------------|----------------------------------------|-------------------|
+| **Production**   | Ethereum Mainnet                       | WETH / USDC       |
+|                  | Arbitrum One, Optimism, Polygon PoS    | (ERC-20 only)     |
+| **Testnets**     | Goerli (incl. Goerli-Arbitrum)         | WETH / USDC       |
+|                  | Mumbai (Polygon)                       | (ERC-20 only)     |
 
-> **Nota:** Se utiliza WETH en lugar de ETH para permitir llamadas a `approve()` y rutas multihop sin lógica especial.
+> **Note:** WETH is used instead of ETH to allow `approve()` calls and multihop routes without special logic.
 
 ---
+
+## 🚧 Project Status
+
+### Completed
+- Basic frontend structure
+- Theme implementation (light/dark mode)
+- Basic layout and components
+
+### In Progress
+- Smart contract development
+- Frontend-backend connection
+- Order management system
+
+### Pending
+- Integration with Uniswap/Chainlink for price feeds
+- Keeper bot implementation
+- Subgraph development
+- Order execution system
+- Testing and deployment scripts
+
+## 🔗 Connection Status
+Currently, the frontend is not connected to any backend or smart contracts. The following connections need to be implemented:
+- Smart contract integration
+- Web3 wallet connection
+- Price feed integration
+- Order management system
+- Event listening and handling
+
+---
+
+## 🛠️ Tech Stack
+- Frontend: Next.js, TailwindCSS, TypeScript
+- Smart Contracts: Solidity 0.8.26, Foundry
+- Web3: Wagmi, Viem
+- Testing: Foundry, Jest
